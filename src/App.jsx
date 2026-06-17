@@ -6,6 +6,7 @@ const App = () => {
     arr.map((value) => [
       {
         value: value,
+        initialValue: value,
         disabled: false,
         count: 0,
       },
@@ -20,11 +21,12 @@ const App = () => {
 
       activeBtn.disabled = true;
       const newCount = activeBtn.count + 1;
-      const newVal = newCount % 2 === 1 ? activeBtn.value - 1 : activeBtn.value + 1;
+      const newVal = newCount % 2 === 1 ? activeBtn.initialValue + 1 : activeBtn.initialValue - 1;
 
       newButton[column] = [...newButton[column], 
         {
           value: newVal,
+          initialValue: activeBtn.initialValue,
           disabled: false,
           count: newCount,
         },
@@ -41,7 +43,7 @@ const App = () => {
             {
               btn.map((b, i) => (
                 <button key={i} disabled = {b.disabled} onClick={() => handleClick(index, i)}
-                  className={`border text-2xl p-2 rounded-xl w-12 ${b.disabled ? "bg-gray-500" : "bg-blue-600"}`}
+                  className={`border text-2xl font-bold shadow-lg transition-all duration-300 p-2 rounded-xl w-16 h-16  ${b.disabled ? "bg-gray-500 opacity-70 cursor-not-allowed" : "bg-blue-700 text-white hover:bg-blue-500 hover:scale-110 cursor-pointer"}`}
                 >
                   {b.value}
                 </button>
